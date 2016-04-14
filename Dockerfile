@@ -71,5 +71,4 @@ VOLUME ${NEXUS_ETC_DIR}
 EXPOSE 8081
 WORKDIR ${NEXUS_LIB_PREFIX}
 ENTRYPOINT ["nexus-env"]
-# ENTRYPOINT, CMD, variable expansion, execv, signal passing... Why all this inconsistency?
 
