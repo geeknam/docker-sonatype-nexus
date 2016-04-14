@@ -1,6 +1,6 @@
-# Sonatype Nexus 3+ Artifact Repository (Milestone 7+)
+# Sonatype Nexus 3+ Artifact Repository
 
-This is a Sonatype Nexus 3+ (Milestone 7+) container for Docker. It will survive for as long as there is no official container for Nexus 3 from Sonatype. This was shamelessly based on the official `sonatype/nexus` container, but soon it became a vastly different Dockerfile.
+This is a Sonatype Nexus 3+ container for Docker. It will survive for as long as there is no official container for Nexus 3 from Sonatype. This was shamelessly based on the official `sonatype/nexus` container, but soon it became a vastly different Dockerfile.
 
 Usage is the same as ever for a container meant to be a service, port 8081 is exported by default:
 
@@ -23,7 +23,7 @@ $ docker run -d \
 During its execution, the container will run a small setup script before executing the Nexus' server. This setup script will:
 
 - Copy all of the configuration files in `${NEXUS_HOME}/etc` into `/etc/nexus`, but only if the folder is completely empty; this means that, when mounting `/etc/nexus` there is no need to copy configuration files if the mounted folder does not contain them, and that is especially useful if the configuration folder is being mounted for the first time.
-- Checks if the environment variable `NEXUS_UID` is set, and if it is, the user on which Nexus will be running will have its UID changed to that indicated by `NEXUS_UID` (e.g. `usermod -u $NEXUS_UID $NEXUS_USER`); also, ownership will be reset for that user on some specific folders and variables, including 
+- Checks if the environment variable `NEXUS_UID` is set, and if it is, the user on which Nexus will be running will have its UID changed to that indicated by `NEXUS_UID` (e.g. `usermod -u $NEXUS_UID $NEXUS_USER`); also, ownership will be reset for that user on some specific folders and variables, including
 `/var/lib/nexus/data` and `/etc/nexus`.
 - Regenerate `nexus.vmoptions` (with all of the JVM flags present by default in the official distribution's `nexus.vmoptions`) and `nexus.rc` (`run_as_user` disabled at the moment because of [a bug](https://issues.sonatype.org/browse/NEXUS-9437), `piddir` is set to `/var/lib/nexus/data`)
 

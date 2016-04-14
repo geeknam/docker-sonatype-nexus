@@ -1,5 +1,5 @@
 FROM       centos:centos7
-MAINTAINER Flávio Lisbôa <flisboa.costa@gmail.com>
+MAINTAINER Nam Ngo <namngology@gmail.com>
 LABEL      version="3" \
            description="Sonatype Nexus 3+"
 
@@ -25,9 +25,9 @@ ENV NEXUS_HOME           ${NEXUS_PREFIX}/default
 ENV NEXUS_CERTS_DIR      ${NEXUS_ETC_DIR}/certificates
 ENV NEXUS_DATA_CERTS_DIR ${NEXUS_DATA_DIR}/${NEXUS_CERTS_NAME}
 ENV NEXUS_DISTRIBUTION   3
-ENV NEXUS_VERSION        3.0.0-m7
+ENV NEXUS_VERSION        3.0.0-03
 ENV NEXUS_BUNDLE         unix
-ENV NEXUS_EXTRACTED_DIR  nexus-3.0.0-b2016011501
+ENV NEXUS_EXTRACTED_DIR  nexus-3.0.0-03
 ENV NEXUS_DOWNLOAD_URL   https://download.sonatype.com/nexus/${NEXUS_DISTRIBUTION}/nexus-${NEXUS_VERSION}-${NEXUS_BUNDLE}.tar.gz
 
 ENV JAVA_PREFIX          /usr/local/share/java
