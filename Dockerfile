@@ -49,10 +49,12 @@ RUN echo "Installing Java from ${JAVA_DOWNLOAD_URL}" \
   && ln -s ${JAVA_PREFIX}/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} ${JAVA_HOME}
 
 RUN mkdir -p ${NEXUS_PREFIX} \
-  && curl --fail --silent --location --retry 3 ${NEXUS_DOWNLOAD_URL} \
+  && curl --fail --location --retry 3 ${NEXUS_DOWNLOAD_URL} \
   | gunzip \
   | tar -x -C ${NEXUS_PREFIX} \
   && ln -s ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR} ${NEXUS_HOME}
+
+RUN cd ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR}/system/com/sonatype/nexus/plugins/nexus-repository-docker/3.0.0-03/ && curl -O https://support.sonatype.com/hc/en-us/article_attachments/206759338/nexus-repository-docker-3.0.0-03.jar
 
 RUN mkdir -p ${NEXUS_DATA_DIR} \
   && useradd -r -c "Sonatype Nexus user" -d ${NEXUS_DATA_DIR} -s /bin/bash ${NEXUS_USER} \
