@@ -54,8 +54,6 @@ RUN mkdir -p ${NEXUS_PREFIX} \
   | tar -x -C ${NEXUS_PREFIX} \
   && ln -s ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR} ${NEXUS_HOME}
 
-RUN cd ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR}/system/com/sonatype/nexus/plugins/nexus-repository-docker/3.0.0-03/ && curl -O https://support.sonatype.com/hc/en-us/article_attachments/206759338/nexus-repository-docker-3.0.0-03.jar
-
 RUN mkdir -p ${NEXUS_DATA_DIR} \
   && useradd -r -c "Sonatype Nexus user" -d ${NEXUS_DATA_DIR} -s /bin/bash ${NEXUS_USER} \
   && chown -R ${NEXUS_USER}:${NEXUS_USER} ${NEXUS_LIB_PREFIX} \
