@@ -25,9 +25,9 @@ ENV NEXUS_HOME           ${NEXUS_PREFIX}/default
 ENV NEXUS_CERTS_DIR      ${NEXUS_ETC_DIR}/certificates
 ENV NEXUS_DATA_CERTS_DIR ${NEXUS_DATA_DIR}/${NEXUS_CERTS_NAME}
 ENV NEXUS_DISTRIBUTION   3
-ENV NEXUS_VERSION        3.0.2-02
+ENV NEXUS_VERSION        3.0.0-03
 ENV NEXUS_BUNDLE         unix
-ENV NEXUS_EXTRACTED_DIR  nexus-3.0.2-02
+ENV NEXUS_EXTRACTED_DIR  nexus-3.0.0-03
 ENV NEXUS_DOWNLOAD_URL   https://download.sonatype.com/nexus/${NEXUS_DISTRIBUTION}/nexus-${NEXUS_VERSION}-${NEXUS_BUNDLE}.tar.gz
 
 ENV JAVA_PREFIX          /usr/local/share/java
@@ -54,6 +54,8 @@ RUN mkdir -p ${NEXUS_PREFIX} \
   | tar -x -C ${NEXUS_PREFIX} \
   && ln -s ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR} ${NEXUS_HOME}
 
+RUN cd ${NEXUS_PREFIX}/${NEXUS_EXTRACTED_DIR}/system/com/sonatype/nexus/plugins/nexus-repository-docker/3.0.0-03/ && curl -O https://support.sonatype.com/hc/en-us/article_attachments/206759338/nexus-repository-docker-3.0.0-03.jar
+
 RUN mkdir -p ${NEXUS_DATA_DIR} \
   && useradd -r -c "Sonatype Nexus user" -d ${NEXUS_DATA_DIR} -s /bin/bash ${NEXUS_USER} \
   && chown -R ${NEXUS_USER}:${NEXUS_USER} ${NEXUS_LIB_PREFIX} \
@@ -71,4 +73,3 @@ VOLUME ${NEXUS_ETC_DIR}
 EXPOSE 8081
 WORKDIR ${NEXUS_LIB_PREFIX}
 ENTRYPOINT ["nexus-env"]
-
